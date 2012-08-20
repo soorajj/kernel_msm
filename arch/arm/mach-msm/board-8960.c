@@ -2867,6 +2867,15 @@ static void __init msm8960_gfx_init(void)
 		platform_device_register(&msm_kgsl_2d0);
 		platform_device_register(&msm_kgsl_2d1);
 	}
+
+	/* Register the 3D core */
+	platform_device_register(&msm_kgsl_3d0);
+
+	/* Register the 2D cores if we are not 8960PRO */
+	if (!cpu_is_msm8960ab()) {
+		platform_device_register(&msm_kgsl_2d0);
+		platform_device_register(&msm_kgsl_2d1);
+	}
 }
 
 static struct msm_rpmrs_level msm_rpmrs_levels[] = {
