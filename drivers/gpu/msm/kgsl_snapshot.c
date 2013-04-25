@@ -402,6 +402,9 @@ int kgsl_snapshot_get_object(struct kgsl_device *device, phys_addr_t ptbase,
 	if (!gpuaddr)
 		return 0;
 
+	if (!gpuaddr)
+		return 0;
+
 	entry = kgsl_get_mem_entry(device, ptbase, gpuaddr, size);
 
 	if (entry == NULL) {
