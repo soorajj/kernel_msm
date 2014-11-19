@@ -402,9 +402,6 @@ int kgsl_snapshot_get_object(struct kgsl_device *device, phys_addr_t ptbase,
 	if (!gpuaddr)
 		return 0;
 
-	if (!gpuaddr)
-		return 0;
-
 	entry = kgsl_get_mem_entry(device, ptbase, gpuaddr, size);
 
 	if (entry == NULL) {
@@ -615,10 +612,6 @@ int kgsl_device_snapshot(struct kgsl_device *device, int hang)
 		KGSL_DRV_ERR(device, "Failed to get GPU active count");
 		return -EINVAL;
 	}
-
-	/* increment the hang count (on hang) for good book keeping */
-	if (hang)
-		device->snapshot_faultcount++;
 
 	/* increment the hang count (on hang) for good book keeping */
 	if (hang)

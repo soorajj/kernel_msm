@@ -213,8 +213,6 @@ int kgsl_add_event(struct kgsl_device *device, u32 id, u32 ts,
 	struct kgsl_event *event;
 	unsigned int queued = 0, cur_ts;
 	struct kgsl_context *context = NULL;
-	struct adreno_context *drawctxt;
-	struct adreno_device *adreno_dev = ADRENO_DEVICE(device);
 
 	BUG_ON(!mutex_is_locked(&device->mutex));
 
@@ -224,15 +222,6 @@ int kgsl_add_event(struct kgsl_device *device, u32 id, u32 ts,
 	if (id != KGSL_MEMSTORE_GLOBAL) {
 		context = kgsl_context_get(device, id);
 		if (context == NULL)
-			return -EINVAL;
-		/* Do not allow registering of event with invalid timestamp */
-		drawctxt = ADRENO_CONTEXT(context);
-		if (timestamp_cmp(ts, drawctxt->timestamp) > 0) {
-			kgsl_context_put(context);
-			return -EINVAL;
-		}
-	} else {
-		if (timestamp_cmp(ts, adreno_dev->ringbuffer.global_ts) > 0)
 			return -EINVAL;
 	}
 	/*
@@ -389,19 +378,9 @@ void kgsl_process_events(struct work_struct *work)
 	struct kgsl_context *context, *tmp;
 	uint32_t timestamp;
 
-	/*
-	 * Bail unless the global timestamp has advanced.  We can safely do this
-	 * outside of the mutex for speed
-	 */
-
-	timestamp = kgsl_readtimestamp(device, NULL, KGSL_TIMESTAMP_RETIRED);
-	if (timestamp == device->events_last_timestamp)
-		return;
-
 	mutex_lock(&device->mutex);
 
-	device->events_last_timestamp = timestamp;
-
+	timestamp = kgsl_readtimestamp(device, NULL, KGSL_TIMESTAMP_RETIRED);
 	_retire_events(device, &device->events, timestamp);
 
 	/* Now process all of the pending contexts */

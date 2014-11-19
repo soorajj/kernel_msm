@@ -452,9 +452,6 @@ void *a3xx_snapshot(struct adreno_device *adreno_dev, void *snapshot,
 	if (adreno_is_a330(adreno_dev) || adreno_is_a305b(adreno_dev))
 		_snapshot_a330_regs(regs, &list);
 
-	/* Disable Clock gating temporarily for the debug bus to work */
-	adreno_regwrite(device, A3XX_RBBM_CLOCK_CTL, 0x00);
-
 	/* Master set of (non debug) registers */
 	snapshot = kgsl_snapshot_add_section(device,
 		KGSL_SNAPSHOT_SECTION_REGS, snapshot, remain,
