@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_KER_VER="Sooplus~1.0.1"
+BASE_KER_VER="Sooplus~1.0.2"
 export LOCALVERSION="-"`echo $BASE_KER_VER`
 export CROSS_COMPILE=~/work/toolchain/arm-cortex_a15-linux-gnueabihf-linaro_4.9.2-2014.09/bin/arm-cortex_a15-linux-gnueabihf-
 export ARCH=arm
