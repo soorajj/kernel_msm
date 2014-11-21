@@ -38,4 +38,5 @@ cd
 cd ~/work/kernel_source/kernel_msm
 make "clean"
 make "mrproper"
+git clean -f
 echo "everything completed."
