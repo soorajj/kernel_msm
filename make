@@ -11,7 +11,7 @@ echo
 echo "Making defconfig"
 DATE_START=$(date +"%s")
 DATE=$(date +"%d-%m-%Y")
-COMPILER="LINARO"
+COMPILER="SABERMOD"
 ARCHIVE_FILE="$BASE_KER_VER-$COMPILER-$DATE"
 
 make "sooplus_defconfig"
@@ -20,7 +20,7 @@ echo "LOCALVERSION="$LOCALVERSION
 echo "CROSS_COMPILE="$CROSS_COMPILE
 echo "ARCH="$ARCH
 
-make -j16 > /dev/null
+make -j16
 
 echo "Build completed."
 echo "Copying zImage to flashable zip."
