@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_KER_VER="Sooplus~1.0.2"
+BASE_KER_VER="Sooplus~1.0.3"
 export LOCALVERSION="-"`echo $BASE_KER_VER`
 export CROSS_COMPILE=~/work/toolchain/arm-eabi-4.10/bin/arm-eabi-
 export ARCH=arm
