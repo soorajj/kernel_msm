@@ -2,7 +2,7 @@
 
 BASE_KER_VER="Sooplus~1.0.2"
 export LOCALVERSION="-"`echo $BASE_KER_VER`
-export CROSS_COMPILE=~/work/toolchain/arm-cortex_a15-linux-gnueabihf-linaro_4.9.2-2014.09/bin/arm-cortex_a15-linux-gnueabihf-
+export CROSS_COMPILE=~/work/toolchain/arm-eabi-4.10/bin/arm-eabi-
 export ARCH=arm
 export SUBARCH=arm
 export KBUILD_BUILD_USER=soorajj
