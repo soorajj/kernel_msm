@@ -2,7 +2,7 @@
 
 BASE_KER_VER="Sooplus~1.0.3"
 export LOCALVERSION="-"`echo $BASE_KER_VER`
-export CROSS_COMPILE=~/work/toolchain/arm-eabi-4.10/bin/arm-eabi-
+export CROSS_COMPILE=~/work/toolchain/arm-eabi-4.9/bin/arm-eabi-
 export ARCH=arm
 export SUBARCH=arm
 export KBUILD_BUILD_USER=soorajj
