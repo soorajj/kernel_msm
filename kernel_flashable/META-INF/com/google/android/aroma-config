@@ -1,0 +1,258 @@
+﻿### LICENSE:
+#
+# Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+### FILE INFO:
+#
+# AROMA Installer 2.70 - AROMA Installer Test Script Configuration
+#       (c) 2011-2012 by Ahmad Amarullah
+#           amarullz - xda-developers
+#           http://www.amarullz.com/
+#
+#       Binary Version  : 2.70RC2
+#       Binary Codename : Flamboyan
+#
+### INFO:
+#
+# * AROMA Resource Dir  = META-INF/com/google/android/aroma
+#
+# * AROMA Temporary Dir = /tmp/aroma/
+
+ini_set("rom_name", "");
+ini_set("rom_version", "");
+ini_set("rom_author", "");
+ini_set("rom_device", "");
+ini_set("rom_date", "");
+
+theme("renovate");
+
+ini_set("force_colorspace","rgba");
+#ini_set("dp","6");
+
+fontresload( "0", "ttf/Roboto-Regular.ttf", "12" );
+fontresload( "1", "ttf/Roboto-Regular.ttf", "18" ); 
+
+viewbox(
+    "Welcome",
+    "You are about to flash <b>"+
+	  ini_get("rom_name")+
+	"</b>\nfor <b>"+ini_get("rom_device")+"</b>.\n\n"+
+    
+	
+      "  VERSION\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
+      "  AUTHOR \t: <b><#selectbg_g>"+ini_get("rom_author")+"</#></b>\n"+
+      "  RELEASED\t: <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n\n\n"+
+
+    "Press Next to Continue...",
+    "@welcome"
+);
+
+agreebox("Terms Of Use","Please read the sooplus Terms of Use...","icons/agreement",
+   "" + readfile_aroma("agreement.txt"),
+   "I Agree with these Terms Of Use...",
+   "Please check the box..."
+);
+
+alert(
+  "NOTE:",
+  "<b>Do not flash this over other custom kernels.</b> Please ensure that you have either a previous version of sooplus or the kernel that came with your ROM installed.",
+  "@alert",
+  "OK"
+);
+
+selectbox(
+  "Maximum CPU Frequency","<b>Select maximum CPU frequency.</b>\n Stock is recommended.","@info","freq0.prop",
+  "1498MHz","",0,
+  "1728MHz","",0,
+  "1958MHz","",0,
+  "2266MHz","(stock)",1,
+  "2342MHz","",0,
+  "2419MHz","",0,
+  "2496MHz","",0,
+  "2573MHz","",0,
+  "2650MHz","",0,
+  "2726MHz","",0,
+  "2803MHz","",0,
+  "2880MHz","",0,
+  "2957MHz","",0
+);
+
+selectbox(
+  "Sweep2Wake and DoubleTap2Wake","Enabling S2W or DT2W will cause battery drain. This can be minimized with the \"Power button toggles S2W/DT2W\" option, which temporarily disables S2W/DT2W, or by enabling \"S2W/DT2W timeout\"","","wg.prop",
+
+  "S2W/DT2W","S2W/DT2W wake screen",0,
+  "Disable S2W/DT2W","",1
+);
+
+if file_getprop("/tmp/aroma/wg.prop","selected.0") == "1"
+then
+
+checkbox(
+  "Gesture Options","<b>Customize Sweep2Wake and DoubleTap2Wake</b>","","gest.prop",
+  
+  "Available Gestures:","",2,
+  "Sweep right","",0,
+  "Sweep left","",0,
+  "Sweep up","",0,
+  "Sweep down","",0,
+  "Double tap","",0,
+
+  "Other Options","",2,
+  "Haptic feedback","enable vibration on successful gesture",0,
+  "Power button toggles S2W/DT2W","Turn screen off with power button to disable S2W/DT2W. S2W/DT2W are re-enabled next time the device wakes up",0,
+  "Double tap on bottom half of screen only","",0
+);
+
+if file_getprop("/tmp/aroma/gest.prop","item.1.1") == "0" 
+  && file_getprop("/tmp/aroma/gest.prop","item.1.2") == "0"
+  && file_getprop("/tmp/aroma/gest.prop","item.1.3") == "0"
+  && file_getprop("/tmp/aroma/gest.prop","item.1.4") == "0"
+  && file_getprop("/tmp/aroma/gest.prop","item.1.5") == "0"
+then
+alert(
+  "PLEASE NOTE:",
+  "You didn't enable any gestures",
+  "@alert",
+  "OK"
+);
+back("1");
+endif;
+
+selectbox(
+  "S2W/DT2W timeout","<b>Select timeout length</b>\nS2W and DT2W will be disabled after this length of time to save battery.","@info","timeout.prop",
+  "Always enabled","",0,
+  "5 minutes","",0,
+  "15 minutes","(default)",1,
+  "30 minutes","",0,
+  "60 minutes","",0,
+  "90 minutes","",0,
+  "120 minutes","",0
+);
+endif;
+
+selectbox(
+  "Sweep2Sleep","<b>Sweep across navbar area to put phone to sleep</b>\nThis feature does NOT drain battery","","s2s.prop",
+  "Disable Sweep2Sleep","",0,
+  "Sweep right","",0,
+  "Sweep left","(default)",0,
+  "Sweep left or right","",1
+);
+
+selectbox(
+  "Kernel Options","<b>Customize Color and Sound options</b> Color profiles will be applied after the first screen off","","misc.prop",
+  "Faux Sound Profiles","",2,
+  "Stock","",0,
+  "Quality","",1,
+  "Loudness","",0,
+  "Quiet","",0,
+  "Color Profiles","",2,
+  "Stock Colors","Google stock profile",0,
+  "Neriamarillo","Neriamarillo v3 profile",0,
+  "Yorici","Yorici Calibrated Punch profile",0,
+  "Piereligio","Piereligio True RGB v7 profile",1
+);
+
+selectbox(
+  "Disk Settings","","","disk.prop",
+
+  "Select i/o scheduler","",2,
+  "CFQ","(stock)",0,
+  "ROW","",0,
+  "DEADLINE","",0,
+  "FIOPS","",1,
+  "SIO","",0,
+  "BFQ","",0,
+
+  "Select readahead buffer size","",2,
+  "128","(stock)",0,
+  "256","",0,
+  "512","",0,
+  "1024","",1
+);
+
+selectbox(
+  "Hotplug Settings","<b>Select the hotplug</b>","","hotplug.prop",
+  "msm_sleeper hotplug","",0,
+  "bricked_hotplug","",0
+);
+
+checkbox(
+  "Other settings","<b>Select the mods you want to install</b>","@personalize","mods.prop",
+  "Enable USB fastcharge","",1,
+  "Multicore power saving","this will group task into least possible cores",0,
+  "Backlight dimmer","Allows reduced screen brightness",1,
+  "Disable Logcat","",1,
+  "Sooplus","Slight boost to L2 cache and bus bandwidth.",1,
+  "GPU Governor","Select to enable simple GPU governor. Default is ondemand.",0,
+  "Disable Fsync","risk of data loss on crash",1,
+  "exfat","exfat file system support",1
+);
+
+selectbox(
+  "Governor Settings","<b>Select the CPU Governor</b>","","cpu.prop",
+  "sooplus governor","recommended",1,
+  "interactive governor","balanced",0,
+  "conservative","powersave",0,
+  "ondemand","",0
+);
+
+selectbox(
+  "Battery life extender","<b>This will set battery charging limit to below selected</b>","","blx.prop",
+  "96%","",0,
+  "97%","",0,
+  "98%","",0,
+  "99%","",1,
+  "100%","",0
+);
+
+checkbox(
+  "Kernel backup","<b>Select to backup current kernel to flashable zip</b>","@personalize","bak.prop",
+  "Backup current kernel","",0
+);
+
+menubox(
+  "sooplus Installer",
+  "Ready to install",
+  "@info",
+  "menu.prop",
+  "Install sooplus","","@install",
+  "Abort installation","","@default"
+);
+
+if prop("menu.prop","selected")=="2"
+then
+  exit("");
+endif;
+
+setvar("retstatus",
+install(
+  "Installing",
+  "Installing sooplus Kernel...\nPlease wait...",
+  "@install")
+);
+
+ini_set("text_next", "Finish");
+
+if getvar("retstatus")=="0" then
+  viewbox(
+  "Installation Completed",
+  "<#080>Congratulations...</#>\n\n"+
+  "sooplus has been installed successfully!\n\n"+
+  "Enjoy!",
+  "@info"
+);
+else
+   viewbox("Installation Failed","\n\nInstaller Status: "+ getvar("retstatus"),"@alert");
+endif;

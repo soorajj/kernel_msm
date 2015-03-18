@@ -1,0 +1,9 @@
+ui_print(" ");
+ui_print("Restoring pre_sooplus_kernel");
+ui_print(" ");
+package_extract_file("pre_sooplus_boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
+run_program("/sbin/busybox", "mount", "/system");
+delete("/system/etc/init.d/99sooplus");
+delete("/system/etc/sooplus.conf");
+unmount("/system");
+ui_print("Done!");

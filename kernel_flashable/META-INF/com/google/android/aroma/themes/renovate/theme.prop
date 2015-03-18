@@ -1,0 +1,74 @@
+img.background=bg
+img.titlebar=titlebar.9
+img.navbar=navbar.9
+img.dialog=dialog.9
+img.dialog.titlebar=dialog_titlebar.9
+img.progress=button.9
+img.prograss.fill=button_press.9
+img.selection=list.9
+img.selection.push=list.9
+img.button=button.9
+img.button.focus=button_focus.9
+img.button.push=button_press.9
+img.checkbox=cb
+img.checkbox.focus=cb_focus
+img.checkbox.push=cb_press
+img.checkbox.on=cb_on
+img.checkbox.on.focus=cb_on_focus
+img.checkbox.on.push=cb_on_press
+img.radio=radio
+img.radio.focus=radio_focus
+img.radio.push=radio_press
+img.radio.on=radio_on
+img.radio.on.focus=radio_on_focus
+img.radio.on.push=radio_on_press
+
+
+color.winbg           = #000000
+#
+color.winbg_g         = #444
+color.winfg           = #ffffff
+color.winfg_gray      = #666
+color.dialogbg        = #000000
+color.dialogbg_g      = #444
+color.dialogfg        = #ffffff
+color.textbg          = #000000
+color.textfg          = #ffffff
+color.textfg_gray     = #c7c7c7
+color.controlbg       = #999
+color.controlbg_g     = #999
+color.controlfg       = #22a6e4
+color.selectbg        = #22a6e4
+color.selectbg_g      = #22a6e4
+color.selectfg        = #22a6e4
+color.titlebg         = #000000
+#section header
+color.titlebg_g       = #000000
+#section header
+color.titlefg         = #22a6e4
+#page title
+color.dlgtitlebg      = #22a6e4
+color.dlgtitlebg_g    = #22a6e4
+color.dlgtitlefg      = #22a6e4
+color.scrollbar       = #22a6e4
+color.navbg           = #000000
+#pop up menu
+color.navbg_g         = #000000
+#pop up menu
+color.border          = #000000
+color.border_g        = #000000
+color.progressglow    = #22a6e4
+#
+
+config.roundsize             = 1
+config.button_roundsize      = 1
+config.window_roundsize      = 1
+config.transition_frame      = 5
+
+font.small                   = font.roboto.small
+font.big                     = font.roboto.big
+
+
+info.themename        = Renovate
+info.description      = Renovate Theme for AROMA Installer
+info.author           = fisha21
