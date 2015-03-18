@@ -436,3 +436,4 @@ obj-$(CONFIG_WALL_CLK) += wallclk.o
 obj-$(CONFIG_WALL_CLK_SYSFS) += wallclk_sysfs.o
 
 obj-$(CONFIG_MSM_SLEEPER) += msm-sleeper.o
+obj-$(CONFIG_BRICKED_HOTPLUG) += bricked_hotplug.o
